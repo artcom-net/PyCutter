@@ -1,0 +1,4 @@
+tmp/
+tests/
+.idea/
+__pycache__/
