@@ -2,3 +2,6 @@ tmp/
 tests/
 .idea/
 __pycache__/
+venv/
+pycutter.sublime-project
+pycutter.sublime-workspace

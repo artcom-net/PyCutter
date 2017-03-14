@@ -30,12 +30,12 @@ class GuiApp(object):
             'initialdir': os.path.expanduser('~')
         }
     }
-    
+
     def __init__(self, master):
         """Initialize an instance.
-        
+
         :param master: Tk instance.
-         
+
         """
         self.master = master
         self.master.title('PyCutter')
@@ -218,19 +218,19 @@ class GuiApp(object):
         :param kwargs
             'msg_type': message type ('error'/'info');
             'message': message text.
-        
+
         """
         func = msg.showerror if kwargs['msg_type'] == 'error' else msg.showinfo
         func(kwargs['msg_type'].capitalize(), kwargs['message'])
 
     def change_wdg_state(self, state, keys, exclude=None):
-        """Changes the state of the group widgets from NORMAL to DISABLED 
-        and conversely. Widgets collected in the widget_dict. 
-        
+        """Changes the state of the group widgets from NORMAL to DISABLED
+        and conversely. Widgets collected in the widget_dict.
+
         :param state: ENABLE/DISABLE;
         :param keys: tuple with keys dict or '*' for all;
         :param exclude: tuple with widget objects.
-        
+
         """
         wdg_list = []
         keys = self.widget_dict.keys() if keys == '*' else keys
@@ -246,7 +246,7 @@ class GuiApp(object):
 
     def switch_cut_option(self):
         """Changes the state of the widgets when switch the radio buttons."""
-        
+
         if self.option_choice.get() == 'each':
             for opt in self.widget_dict['options']:
                 self._change_state(
@@ -258,30 +258,30 @@ class GuiApp(object):
                 state = 'normal' if opt == self.option_choice.get() \
                     else 'disabled'
                 self._change_state(state, self.widget_dict['options'][opt])
-    
+
     @staticmethod
     def _change_state(state, wdg_list):
         """Changes the state of the widgets.
-        
+
         :param state: ENABLE/DISABLE;
         :param wdg_list: the list of widgets.
-        
+
         """
         for wdg in wdg_list:
             wdg['state'] = state
 
     def switch_save_option(self):
         """Switches the state of save section."""
-        
+
         self.b_save['state'] = NORMAL if self.option_save.get() else DISABLED
         self.e_output['state'] = 'readonly' if self.option_save.get() \
             else DISABLED
 
     def _insert_path(self, target):
         """Inserts the value of a file path or save location in entry widget.
-        
+
         :param target: string specifies a entry widget ('input'/'save').
-        
+
         """
         attr_name = '%s_path' % target
         entry, path = (self.e_path, self.input_path) if target == 'input' \
@@ -293,10 +293,10 @@ class GuiApp(object):
             entry['state'] = 'readonly' if path else DISABLED
         else:
             setattr(self, attr_name, entry.get())
-    
+
     def clear_entry_path(self):
         """Remove path from entry."""
-        
+
         self.input_path = None
         self.e_path['state'] = NORMAL
         self.e_path.delete(0, END)
@@ -304,9 +304,9 @@ class GuiApp(object):
 
     def change_status(self, status):
         """Changes the status of the application.
-        
+
         :param status: string value.
-        
+
         """
         self.l_status['text'] = status
         self.l_status.update()
